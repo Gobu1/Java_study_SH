@@ -29,6 +29,7 @@ public class BankMembersDAO implements MembersDAO {
 		return sqlSession.insert(NAMESPACE+"setJoin", bankMembersDTO);
 	}
 
+
 	
 	
 	

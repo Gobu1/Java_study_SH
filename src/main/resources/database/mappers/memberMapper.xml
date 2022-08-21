@@ -10,12 +10,13 @@
 	</select>
 	
 	<select id="getSearchByID" parameterType="java.lang.String" resultType="com.iu.start.bankMembers.BankMembersDTO">
-	SELECT * FROM BANKMEMBERS WHERE USERNAME LIKE '%'||#{search}||'%' ORDER BY ASC
+	SELECT * FROM BANKMEMBERS WHERE USERNAME LIKE '%'||#{search}||'%' 
 	</select>
 	
 	<select id="setJoin" parameterType="java.lang.String" resultType="com.iu.start.bankMembers.BankMembersDTO">
 	INSERT INTO BANKMEMBERS VALUES (#{userName}, #{password}, #{name}, #{email}, #{phone})
 	</select>
+	
 	
 	
 </mapper>

@@ -9,5 +9,5 @@ public interface MembersDAO {
 	public List<BankMembersDTO> getSearchByID(String search)throws Exception;
 	
 	public int setJoin(BankMembersDTO bankMembersDTO)throws Exception;
-
+	
 }

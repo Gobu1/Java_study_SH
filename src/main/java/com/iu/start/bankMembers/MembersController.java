@@ -73,15 +73,15 @@ public class MembersController {
 	}
 	
 	@RequestMapping(value = "search.iu", method = RequestMethod.POST)
-	public String getSearchByID(BankMembersDTO bankMembersDTO, Model model) throws Exception {
+	public String getSearchByID(String search, Model model) throws Exception {
 		System.out.println("post 서치 실행");
 		
-		System.out.println(bankMembersDTO.getUserName());
-		List<BankMembersDTO> ar = bankMembersService.getSearchByID(bankMembersDTO.getUserName());
-		
+		List<BankMembersDTO> ar = bankMembersService.getSearchByID(search);
 		model.addAttribute("list", ar);
 		return "member/list";
 	}
+	
+	
 	
 	
 	
