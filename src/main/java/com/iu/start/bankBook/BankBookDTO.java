@@ -1,5 +1,9 @@
 package com.iu.start.bankBook;
 
+import java.util.List;
+
+import com.iu.start.bankAccount.BankAccountDTO;
+
 public class BankBookDTO {
 	
 	private Long bookNum;
@@ -7,6 +11,14 @@ public class BankBookDTO {
 	private Long bookRate;
 	private Long bookSale;
 	private String bookContents;
+	private List<BankAccountDTO> bankAccountDTOs;
+	
+	public List<BankAccountDTO> getBankAccountDTOs() {
+		return bankAccountDTOs;
+	}
+	public void setBankAccountDTOs(List<BankAccountDTO> bankAccountDTOs) {
+		this.bankAccountDTOs = bankAccountDTOs;
+	}
 	
 	public Long getBookNum() {
 		return bookNum;

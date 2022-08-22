@@ -18,6 +18,6 @@ public interface BookDAO {
 	public int setChangeSale(BankBookDTO bankBookDTO)throws Exception;
 	
 	//BookNum의 값으로 조회
-	public List<BankBookDTO> getDetail(BankBookDTO bankBookDTO)throws Exception;
+	public BankBookDTO getDetail(BankBookDTO bankBookDTO)throws Exception;
 
 }

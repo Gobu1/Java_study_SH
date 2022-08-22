@@ -32,7 +32,7 @@ public class BankBookService {
 		return bankBookDAO.setChangeSale(bankBookDTO);
 	}
 
-	public List<BankBookDTO> getDetail(BankBookDTO bankBookDTO) throws Exception {
+	public BankBookDTO getDetail(BankBookDTO bankBookDTO) throws Exception {
 		return bankBookDAO.getDetail(bankBookDTO);
 	}
 }

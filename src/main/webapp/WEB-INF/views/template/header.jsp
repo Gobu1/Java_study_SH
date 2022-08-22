@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <header class="container-fluid">
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="container-fluid">
@@ -10,9 +11,13 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                 <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <c:if test="${empty sessionScope.member}">
                 <a class="nav-link" href="../member/login.iu">로그인</a>
                 <a class="nav-link" href="../member/join.iu">가입</a>
-                
+                </c:if>
+                <c:if test="${not empty sessionScope.member}">
+                <a class="nav-link" href="../member/myPage.iu">내 정보</a>
+                </c:if>
                 </div>
             </div>
             </div>

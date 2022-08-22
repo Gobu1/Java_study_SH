@@ -11,7 +11,7 @@ public class BankBookDAO implements BookDAO{
 	
 	@Autowired
 	private SqlSession sqlSession;
-	private final String NAMESPACE = "com.iu.start.bankBook.BankBookDAO";
+	private final String NAMESPACE = "com.iu.start.bankBook.BankBookDAO.";
 	
 	
 	@Override
@@ -40,8 +40,8 @@ public class BankBookDAO implements BookDAO{
 	}
 
 	@Override
-	public List<BankBookDTO> getDetail(BankBookDTO bankBookDTO) throws Exception {
-		return sqlSession.selectList(NAMESPACE+"getDetail", bankBookDTO);
+	public BankBookDTO getDetail(BankBookDTO bankBookDTO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+"getDetail", bankBookDTO);
 	}
 
 }

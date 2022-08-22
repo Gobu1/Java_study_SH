@@ -5,17 +5,40 @@
 
 <mapper namespace="com.iu.start.bankMembers.BankMembersDAO">
 
-	<select id="getLogin" parameterType="com.iu.start.bankMembers.BankMembersDTO" resultType="com.iu.start.bankMembers.BankMembersDTO">
+	<select id="getLogin" parameterType="BankMembersDTO" resultType="BankMembersDTO">
 	SELECT USERNAME, NAME FROM BANKMEMBERS WHERE USERNAME = #{userName} AND PASSWORD = #{password}
 	</select>
 	
-	<select id="getSearchByID" parameterType="java.lang.String" resultType="com.iu.start.bankMembers.BankMembersDTO">
+	<select id="getSearchByID" parameterType="String" resultType="BankMembersDTO">
 	SELECT * FROM BANKMEMBERS WHERE USERNAME LIKE '%'||#{search}||'%' 
 	</select>
 	
-	<select id="setJoin" parameterType="java.lang.String" resultType="com.iu.start.bankMembers.BankMembersDTO">
+	<select id="setJoin" parameterType="BankMembersDTO" >
 	INSERT INTO BANKMEMBERS VALUES (#{userName}, #{password}, #{name}, #{email}, #{phone})
 	</select>
+	
+	<select id="getMyPage" parameterType="BankMembersDTO" resultMap="getMyPageResult">
+	SELECT USERNAME, NAME, EMAIL, PHONE, BOOKNAME, ACCOUNTNUM, ACCOUNTDATE FROM BANKACCOUNT BA 
+		INNER JOIN BANKBOOK BB USING (BOOKNUM)
+    		INNER JOIN BANKMEMBERS BM USING (USERNAME)
+    			WHERE USERNAME = #{userName}
+	</select>
+	
+	<resultMap type="BankMembersDTO" id="getMyPageResult">
+		<id column="USERNAME" property="userName"></id>
+		<result column="NAME" property="name"></result>
+		<result column="EMAIL" property="email"></result>
+		<result column="PHONE" property="phone"></result>
+		
+		<collection property="bankAccountDTOs" javaType="List" ofType="BankAccountDTO">
+			<id column="ACCOUNTNUM" property="accountNum"></id>
+			<result column="ACCOUNTDATE" property="accountDate"></result>
+			
+			<association property="bankBookDTO" javaType="BankBookDTO">
+				<result column="BOOKNAME" property="bookName"></result>
+			</association>
+		</collection>
+	</resultMap>
 	
 	
 	

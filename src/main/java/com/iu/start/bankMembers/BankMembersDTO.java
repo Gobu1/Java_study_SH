@@ -1,11 +1,16 @@
 package com.iu.start.bankMembers;
 
+import java.util.List;
+
+import com.iu.start.bankAccount.BankAccountDTO;
+
 public class BankMembersDTO {
 	private String userName;
 	private String password;
 	private String name;
 	private String email;
 	private String phone;
+	private List<BankAccountDTO> bankAccountDTOs;
 	
 	public String getUserName() {
 		return userName;
@@ -36,6 +41,12 @@ public class BankMembersDTO {
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+	public List<BankAccountDTO> getBankAccountDTOs() {
+		return bankAccountDTOs;
+	}
+	public void setBankAccountDTOs(List<BankAccountDTO> bankAccountDTOs) {
+		this.bankAccountDTOs = bankAccountDTOs;
 	}
 	
 	

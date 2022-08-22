@@ -1,6 +1,7 @@
 package com.iu.start.bankMembers;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -10,6 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.iu.start.bankAccount.BankAccountDTO;
+import com.iu.start.bankAccount.BankAccountService;
 
 @Controller
 @RequestMapping(value="/member/*")
@@ -18,6 +23,8 @@ public class MembersController {
 
 	@Autowired
 	private BankMembersService bankMembersService;
+//	@Autowired
+//	private BankAccountService bankAccountService;
 	
 	
 	@RequestMapping(value="logout.iu", method=RequestMethod.GET)
@@ -81,6 +88,19 @@ public class MembersController {
 		return "member/list";
 	}
 	
+	@RequestMapping(value = "myPage.iu", method = RequestMethod.GET)
+	public ModelAndView getMyPage(HttpSession session) throws Exception {
+		System.out.println("get mypage 실행");
+		ModelAndView mv = new ModelAndView();
+		BankMembersDTO bankMembersDTO = (BankMembersDTO)session.getAttribute("member");
+		bankMembersDTO = bankMembersService.getMyPage(bankMembersDTO);
+//		List<BankAccountDTO> ar = bankAccountService.getListByUserName(bankMembersDTO);
+//		mv.addObject("list", ar);
+		mv.addObject("dto", bankMembersDTO);
+		mv.setViewName("member/myPage");
+		return mv;
+		
+	}
 	
 	
 	
