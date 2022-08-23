@@ -5,6 +5,10 @@
 
 <mapper namespace="com.iu.start.bankAccount.BankAccountDAO">
 
+	<insert id="setAddAccount" parameterType="BankAccountDTO">
+		INSERT INTO BANKACCOUNT VALUES (ACCOUNT_SEQ.NEXTVAL, #{userName}, #{bookNum}, SYSDATE)
+	</insert>
+
 	<select id="getListByUserName" parameterType="BankMembersDTO" resultMap="getListByBB">
 	SELECT BA.ACCOUNTNUM, BB.BOOKNAME, BA.ACCOUNTDATE
 	FROM BANKACCOUNT BA 

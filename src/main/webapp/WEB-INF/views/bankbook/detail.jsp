@@ -36,16 +36,11 @@
 
 	
 	<!-- 상대경로 -->
-	<a href="../member/login.iu">Login</a>
-	<!-- 절대경로 -->
-	<a href="/member/join.iu">Join</a>
-	
+
 	<a href="./list.iu">리스트보기</a>
 	
 	<a href="./update.iu?bookNum=${dto.bookNum}">수정</a>
 	<a href="./delete.iu?bookNum=${dto.bookNum}">삭제</a>
-	<c:if test="${not empty sessionScope.member}">
-	<a href="../bankAccount/add.iu?bookNum=${dto.bookNum}">가입하기</a>
-	</c:if>
+
 </body>
 </html>

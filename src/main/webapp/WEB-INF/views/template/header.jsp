@@ -14,9 +14,11 @@
                 <c:if test="${empty sessionScope.member}">
                 <a class="nav-link" href="../member/login.iu">로그인</a>
                 <a class="nav-link" href="../member/join.iu">가입</a>
+                <a class="nav-link" href="../bankbook/list.iu">상품목록</a>
                 </c:if>
                 <c:if test="${not empty sessionScope.member}">
                 <a class="nav-link" href="../member/myPage.iu">내 정보</a>
+                <a class="nav-link" href="../bankbook/list.iu">상품목록</a>
                 </c:if>
                 </div>
             </div>

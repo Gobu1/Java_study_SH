@@ -15,7 +15,7 @@ public class BankAccountDAO {
 	private SqlSession sqlSession;
 	private final String NAMESPACE = "com.iu.start.bankAccount.BankAccountDAO.";
 	
-	public int add(BankAccountDTO bankAccountDTO)throws Exception{
+	public int setAddAccount(BankAccountDTO bankAccountDTO)throws Exception{
 		return sqlSession.insert(NAMESPACE+"add", bankAccountDTO);
 	}
 	

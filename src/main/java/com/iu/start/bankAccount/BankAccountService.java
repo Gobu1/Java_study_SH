@@ -14,7 +14,10 @@ public class BankAccountService {
 	private BankAccountDAO bankAccountDAO;
 	
 	public List<BankAccountDTO> getListByUserName(BankMembersDTO bankMembersDTO) throws Exception{
-		System.out.println("ACCOUNT 서비스 실행");
 		return bankAccountDAO.getListByUserName(bankMembersDTO);
+	}
+	
+	public int setAddAccount(BankAccountDTO bankAccountDTO)throws Exception{
+		return bankAccountDAO.setAddAccount(bankAccountDTO);
 	}
 }
