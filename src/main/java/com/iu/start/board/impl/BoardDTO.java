@@ -1,6 +1,6 @@
 package com.iu.start.board.impl;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class BoardDTO {
 	

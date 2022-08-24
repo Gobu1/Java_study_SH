@@ -19,12 +19,12 @@ public class NoticeDAOTest extends MyAbstractTest {
 	@Autowired
 	private NoticeDAO noticeDAO;
 	
-	@Test
-	public void getList()throws Exception{
-		BoardDTO boardDTO = new BoardDTO();
-		List<BoardDTO> ar = noticeDAO.getList();
-		assertEquals(0, ar.size());
-	}
+//	@Test
+//	public void getList()throws Exception{
+//		BoardDTO boardDTO = new BoardDTO();
+//		List<BoardDTO> ar = noticeDAO.getList();
+//		assertEquals(0, ar.size());
+//	}
 	
 	
 //	@Test
@@ -37,17 +37,24 @@ public class NoticeDAOTest extends MyAbstractTest {
 	
 //	@Test
 //	public void setAdd()throws Exception{
+//		for(int i=0; i<100; i++) {
 //		BoardDTO boardDTO = new BoardDTO();
-//		Date date = new Date();
+//
 //		boardDTO.setNum(1L);
-//		boardDTO.setTitle("asd");
-//		boardDTO.setContents("dd");
-//		boardDTO.setWriter("dd");
-//		boardDTO.setRegDate(date);
-//		boardDTO.setHit(13L);
+//		boardDTO.setTitle("asd"+i);
+//		boardDTO.setContents("dd"+i);
+//		boardDTO.setWriter("dd"+i);
 //		int result = noticeDAO.setAdd(boardDTO);
-//		assertEquals(1, result);
+//		if(i%10==0) {
+//			Thread.sleep(500);
+//		}
 //	}
+		
+	@Test
+	public void getCount()throws Exception{
+		long count = noticeDAO.getCount();
+		assertEquals(103, count);
+	}
 	
 	
 

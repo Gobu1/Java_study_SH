@@ -6,7 +6,10 @@
 <mapper namespace="com.iu.start.board.qna.QnaDAO">
 	
 	<select id="getList" resultType="QnaDTO">
-		SELECT NUM, TITLE, WRITER, REGDATE, HIT FROM QNA ORDER BY NUM DESC
+		 SELECT * FROM
+			(SELECT ROWNUM R, N.* FROM
+				(SELECT * FROM QNA ORDER BY NUM DESC) N)
+					WHERE R BETWEEN 1 AND 10
 	</select>
 	
 	<select id="getDetail" parameterType="BoardDTO" resultType="QnaDTO">

@@ -10,8 +10,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-                <a class="nav-link" href="/board/list.iu">공지사항</a>
+                <a class="nav-link active" aria-current="page" href="">Home</a>
+                <a class="nav-link" href="/notice/list.iu">공지사항</a>
+                <a class="nav-link" href="/qna/list.iu">QNA</a>
                 <a class="nav-link" href="/bankbook/list.iu">상품목록</a>
                 <a class="nav-link" href="/member/search.iu">회원검색</a>
                 <c:if test="${empty sessionScope.member}">

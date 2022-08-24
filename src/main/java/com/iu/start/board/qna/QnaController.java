@@ -2,6 +2,7 @@ package com.iu.start.board.qna;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,14 +15,16 @@ import com.iu.start.board.impl.BoardDTO;
 @RequestMapping("/qna/*")
 public class QnaController {
 	
+	@Autowired
 	private QnaService qnaService;
 	
 	@RequestMapping(value = "list.iu", method = RequestMethod.GET)
-	public ModelAndView getList()throws Exception{
+	public ModelAndView getList(Long page)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		List<BoardDTO> ar= qnaService.getList();
+		List<BoardDTO> ar= qnaService.getList(page);
+		mv.addObject("board", "QNA");
 		mv.addObject("list",ar);
-		mv.setViewName("qna/list");
+		mv.setViewName("board/list");
 		return mv;
 	}
 	
@@ -29,12 +32,12 @@ public class QnaController {
 	public String getDetail(BoardDTO boardDTO, Model model)throws Exception{
 		boardDTO = qnaService.getDetail(boardDTO);
 		model.addAttribute("boardDTO", boardDTO);
-		return "qna/detail";
+		return "board/detail";
 	}
 	
 	@RequestMapping(value = "add.iu", method = RequestMethod.GET)
 	public String setAdd()throws Exception{
-		return "qna/add";
+		return "board/add";
 	}
 	
 	@RequestMapping(value = "add.iu", method = RequestMethod.POST)
@@ -47,7 +50,7 @@ public class QnaController {
 	public ModelAndView setUpdate(BoardDTO boardDTO, ModelAndView mv)throws Exception{
 		boardDTO = qnaService.getDetail(boardDTO);
 		mv.addObject("boardDTO",boardDTO);
-		mv.setViewName("qna/update");
+		mv.setViewName("board/update");
 		return mv;
 	}
 
@@ -65,7 +68,7 @@ public class QnaController {
 	
 	@RequestMapping(value = "reply.iu", method = RequestMethod.GET)
 	public String setReply(BoardDTO boardDTO)throws Exception{
-		return "qna/reply";
+		return "board/reply";
 	}
 	
 	@RequestMapping(value = "reply.iu", method = RequestMethod.POST)

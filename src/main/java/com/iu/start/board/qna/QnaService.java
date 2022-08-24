@@ -15,8 +15,8 @@ public class QnaService implements BoardService{
 	private QnaDAO qnaDAO;
 
 	@Override
-	public List<BoardDTO> getList() throws Exception {
-		return qnaDAO.getList();
+	public List<BoardDTO> getList(Long page) throws Exception {
+		return qnaDAO.getList(null);
 	}
 
 	@Override
@@ -41,6 +41,12 @@ public class QnaService implements BoardService{
 	
 	public int setReply(BoardDTO boardDTO) throws Exception {
 		return qnaDAO.setReply(boardDTO);
+	}
+
+	@Override
+	public Long getCount() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
