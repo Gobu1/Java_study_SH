@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iu.start.board.impl.BoardDTO;
+import com.iu.start.util.Pager;
 
 @Controller
 @RequestMapping("/qna/*")
@@ -19,9 +20,9 @@ public class QnaController {
 	private QnaService qnaService;
 	
 	@RequestMapping(value = "list.iu", method = RequestMethod.GET)
-	public ModelAndView getList(Long page)throws Exception{
+	public ModelAndView getList(Pager pager)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		List<BoardDTO> ar= qnaService.getList(page);
+		List<BoardDTO> ar= qnaService.getList(pager);
 		mv.addObject("board", "QNA");
 		mv.addObject("list",ar);
 		mv.setViewName("board/list");

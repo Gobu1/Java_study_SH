@@ -3,10 +3,12 @@ package com.iu.start.board.impl;
 import java.util.List;
 import java.util.Map;
 
+import com.iu.start.util.Pager;
+
 
 public interface BoardDAO {
 	
-	public List<BoardDTO> getList(Map<String, Long> map)throws Exception;
+	public List<BoardDTO> getList(Pager pager)throws Exception;
 	
 	public BoardDTO getDetail(BoardDTO boardDTO)throws Exception;
 	

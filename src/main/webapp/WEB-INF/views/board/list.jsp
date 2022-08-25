@@ -15,7 +15,7 @@
 <body>
 <c:import url="../template/header.jsp"></c:import>
 <br><br>
-<h1 class="align-center">${board } Page</h1>
+<h1 class="align-center">${board} Page</h1>
 <br>
 <section class="container-fluid col-lg-6">
 	<div class="row">
@@ -42,6 +42,34 @@
 		</c:forEach>
 	  </tbody>
 </table>
+	<nav aria-label="Page navigation example">
+	  <ul class="pagination">
+		    <li class="page-item ${pager.pre?'':'disabled' }">
+		   	 <a class="page-link" href="./list.iu?page=${pager.startNum-1}" aria-label="previous">Previous
+		    		<span aria-hidden="true">&raquo</span></a>
+		    </li>
+	    
+	    	<c:forEach begin="${pager.startNum }" end="${pager.lastNum }" var="i">
+	    		<li class="page-item"><a class="page-link" href="./list.iu?page=${i}">${i }</a></li>
+	    	</c:forEach>
+	    	
+  			
+<%--	    </c:if>
+	    	<c:choose>
+	    		<c:when test="${pager.next}">
+	    			<li class="page-item">	
+	    		</c:when>
+	    		<c:otherwise>
+					<li class="page-item disabled">
+	    		</c:otherwise>
+	    	</c:choose> --%>
+	    	<li class="page-item ${pager.next?'':'disabled'}">	
+	    		<a class="page-link" href="./list.iu?page=${pager.lastNum+1 }" aria-label="next">Next
+	    		<span aria-hidden="true">&raquo</span>
+	    	</a>
+	    </li>
+	  </ul>
+	</nav>
 </div>
 <c:if test="${not empty sessionScope.member}">
 <a href="./add.iu" class="btn btn-outline-primary" 
