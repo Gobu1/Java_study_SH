@@ -16,5 +16,4 @@ public interface BoardService {
 	
 	public int setDelete(BoardDTO boardDTO)throws Exception;
 	
-	public Long getCount()throws Exception;
 }

@@ -21,10 +21,8 @@ public class NoticeService implements BoardService {
 	public List<BoardDTO> getList(Pager pager) throws Exception {
 		
 		pager.getRowNum();
-		Long totalCount=noticeDAO.getCount();
-
+		Long totalCount=noticeDAO.getCount(pager);
 		pager.getNum(totalCount);
-		
 //		Long perPage=10L; //한 페이지에 출력할 목록의 개수
 //		Long startRow=(page-1)*perPage+1;
 //		Long lastRow=page*perPage;
@@ -99,9 +97,6 @@ public class NoticeService implements BoardService {
 		return noticeDAO.setDelete(boardDTO);
 	}
 	
-	@Override
-	public Long getCount()throws Exception{
-		return noticeDAO.getCount();
-	}
+	
 
 }

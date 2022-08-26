@@ -18,5 +18,5 @@ public interface BoardDAO {
 	
 	public int setDelete(BoardDTO boardDTO)throws Exception;
 	
-	public Long getCount()throws Exception;
+	public Long getCount(Pager pager)throws Exception;
 } 

@@ -23,13 +23,20 @@
 		<form action="./Add.iu" name="add" method="post">
 			<input type="text" name="title" class="form-control mt-4 mb-2"
 				readonly value="${boardDTO.title }" required>
+			<input class="form-control" type="text" value="${boardDTO.regDate }" aria-label="readonly input example" readonly>
 			<div class="form-group">
 				<textarea class="form-control" rows="10" name="contents"
 					readonly  required>${boardDTO.contents }</textarea>
 			</div>
 			<c:if test="${not empty sessionScope.member}">
+				<a href="./reply.iu?num=${boardDTO.num }" " class="btn btn-outline-primary" 
+				style="float: right; width: 100px; height: 36px;">답글 작성</a>
+				<a href="./delete.iu?num=${boardDTO.num } " class="btn btn-outline-primary" 
+				style="float: right; width: 90px; height: 36px;">글 삭제</a>
 				<a href="./update.iu?num=${boardDTO.num } " class="btn btn-outline-primary" 
 				style="float: right; width: 90px; height: 36px;">글 수정</a>
+				<a href="./list.iu " class="btn btn-outline-primary" 
+				style="float: right; width: 90px; height: 36px;">글 목록</a>
 			</c:if>
 		</form>
 	</div>

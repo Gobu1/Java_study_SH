@@ -29,7 +29,7 @@ public class NoticeController {
 	@RequestMapping(value = "list.iu", method = RequestMethod.GET)
 	public ModelAndView getList(Pager pager)throws Exception{
 		ModelAndView mv = new ModelAndView();
-
+		
 		List<BoardDTO> ar = noticeService.getList(pager);
 		mv.addObject("pager", pager);
 		mv.addObject("list",ar);
@@ -52,25 +52,27 @@ public class NoticeController {
 	
 	@RequestMapping(value = "add.iu", method = RequestMethod.POST)
 	public String setAdd(BoardDTO boardDTO)throws Exception{	
-		System.out.println(boardDTO.getContents());
+		
 		int result = noticeService.setAdd(boardDTO);
-		System.out.println("테스트2");
+		
 		return "redirect:./list.iu";
 	}
 	
 	@RequestMapping(value = "update.iu", method = RequestMethod.GET)
 	public ModelAndView setUpdate(BoardDTO boardDTO, ModelAndView mv)throws Exception{
 		boardDTO = noticeService.getDetail(boardDTO);
-		System.out.println(boardDTO.getNum());
+		mv.addObject("boardDTO", boardDTO);
 		mv.setViewName("board/update");
 		return mv;
 	}
 
 	@RequestMapping(value = "update.iu", method = RequestMethod.POST)
 	public String setUpdate(BoardDTO boardDTO)throws Exception{
-		System.out.println(boardDTO.getNum());
+	
+		
 		int result = noticeService.setUpdate(boardDTO);
-		return "redirect:./detial.iu?num="+boardDTO.getNum();
+		
+		return "redirect:./list.iu";
 	}
 	
 	@RequestMapping(value = "delete.iu", method = RequestMethod.GET)

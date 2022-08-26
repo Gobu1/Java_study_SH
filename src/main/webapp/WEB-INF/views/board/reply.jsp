@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>update Page</title>
+<title>Add Page</title>
  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 <style>
     .align-center {text-align: center;}
@@ -15,21 +15,24 @@
 <body>
 <c:import url="../template/header.jsp"></c:import>
 <br><br>
-<h1 class="align-center">update Page</h1>
+<h1 class="align-center"> Reply Page</h1>
 <br>
 
 <section class="container-fluid col-lg-6">
 	<div class="row">
-		<form action="./update.iu" name="update" method="post">
+		<form action="./reply.iu" name="reply" method="post">
 			<input type="hidden" name="num" value="${boardDTO.num }">
-			<input type="text" name="title" 
-				value="${boardDTO.title }" class="form-control mt-4 mb-2" required>
+			<input type="text" name="title" class="form-control mt-4 mb-2"
+				placeholder="제목을 입력해주세요." required>
 			<div class="form-group">
 				<textarea class="form-control" rows="10" name="contents"
-				    required>${boardDTO.contents }</textarea>
+					placeholder="내용을 입력해주세요" required></textarea>
 			</div>
-				<button type="submit" class="btn btn-primary" style="float: right; width: 90px; height: 36px;">글 수정</button>
+			<input type="text" name="writer" class="form-control mt-4 mb-2"
+				placeholder="작성자를 입력해주세요." required>
+			<button type="submit" class="btn btn-primary" style="float: right; width: 90px; height: 36px;">제출하기</button>
 		</form>
+
 	</div>
 </section>
 <c:import url="../template/footer.jsp"></c:import>

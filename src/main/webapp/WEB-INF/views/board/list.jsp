@@ -18,6 +18,27 @@
 <h1 class="align-center">${board} Page</h1>
 <br>
 <section class="container-fluid col-lg-6">
+	<form action="./list.iu"  class="row gy-2 gx-3 align-items-center">
+	  <div class="col-auto">
+	    <label class="visually-hidden" for="kind">Kind</label>
+	    <select name="kind" class="form-select" id="kind">
+	      <option value="title">Title</option>
+	      <option value="contents">Contents</option>
+	      <option value="writer">Writer</option>
+	    </select>
+	  </div>
+	  <div class="col-auto">
+	    <label class="visually-hidden" for="autoSizingInputGroup"></label>
+	    <div class="input-group">
+	      <input type="text" class="form-control" name="search" id="autoSizingInputGroup" placeholder="검색어를 입력하세요">
+	  	</div>
+	  </div>
+	  
+	  <div class="col-auto">
+	    <button type="submit" class="btn btn-primary">검색</button>
+	  </div>
+	</form>
+
 	<div class="row">
 	<table class="table">
 	  <thead class="table-secondary">
@@ -34,7 +55,12 @@
 	    <c:forEach items="${list}" var="dto" >
 			<tr>
 				<td class="table-light">${dto.num }</td>
-				<td class="table-light"><a href="./detail.iu?num=${dto.num}">${dto.title }</a></td>
+				<td class="table-light">
+				<c:catch>
+				<c:forEach begin="1" end="${dto.depth }">&nbsp;
+				</c:forEach>
+				</c:catch>
+				<a href="./detail.iu?num=${dto.num}">${dto.title }</a></td>
 				<td class="table-light">${dto.writer }</td>
 				<td class="table-light">${dto.regDate }</td>
 				<td class="table-light">${dto.hit }</td>
@@ -45,12 +71,12 @@
 	<nav aria-label="Page navigation example">
 	  <ul class="pagination">
 		    <li class="page-item ${pager.pre?'':'disabled' }">
-		   	 <a class="page-link" href="./list.iu?page=${pager.startNum-1}" aria-label="previous">Previous
+		   	 <a class="page-link" href="./list.iu?page=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}	" aria-label="previous">Previous
 		    		<span aria-hidden="true">&raquo</span></a>
 		    </li>
 	    
 	    	<c:forEach begin="${pager.startNum }" end="${pager.lastNum }" var="i">
-	    		<li class="page-item"><a class="page-link" href="./list.iu?page=${i}">${i }</a></li>
+	    		<li class="page-item"><a class="page-link" href="./list.iu?page=${i}&kind=${pager.kind}&search=${pager.search}">${i }</a></li>
 	    	</c:forEach>
 	    	
   			
@@ -64,7 +90,7 @@
 	    		</c:otherwise>
 	    	</c:choose> --%>
 	    	<li class="page-item ${pager.next?'':'disabled'}">	
-	    		<a class="page-link" href="./list.iu?page=${pager.lastNum+1 }" aria-label="next">Next
+	    		<a class="page-link" href="./list.iu?page=${pager.lastNum+1 }&kind=${pager.kind}&search=${pager.search}" aria-label="next">Next
 	    		<span aria-hidden="true">&raquo</span>
 	    	</a>
 	    </li>

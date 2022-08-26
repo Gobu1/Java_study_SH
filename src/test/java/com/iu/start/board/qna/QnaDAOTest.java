@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.iu.start.MyAbstractTest;
-import com.iu.start.board.impl.BoardDTO;
 
 public class QnaDAOTest extends MyAbstractTest{
 	
@@ -21,12 +20,29 @@ public class QnaDAOTest extends MyAbstractTest{
 //		List<BoardDTO> ar = qnaDAO.getList();
 //		assertEquals(0, ar.size());
 //	}
+//	@Test
+//	public void setDelete()throws Exception{
+//		BoardDTO boardDTO = new BoardDTO();
+//		boardDTO.setNum(21L);
+//		int result = qnaDAO.setDelete(boardDTO);
+//		assertEquals(1, result);
+//	}
+	
 	@Test
-	public void setDelete()throws Exception{
-		BoardDTO boardDTO = new BoardDTO();
-		boardDTO.setNum(21L);
-		int result = qnaDAO.setDelete(boardDTO);
-		assertEquals(1, result);
+	public void setAdd()throws Exception{
+		for(int i=0; i<100; i++) {
+		QnaDTO qnaDTO = new QnaDTO();
+
+		qnaDTO.setNum(1L);
+		qnaDTO.setTitle("qna"+i);
+		qnaDTO.setContents("addf"+i);
+		qnaDTO.setWriter("qq"+i);
+		int result = qnaDAO.setAdd(qnaDTO);
+		if(i%10==0) {
+			Thread.sleep(500);
+		}
+		}
 	}
+		
 	
 }

@@ -14,10 +14,28 @@ public class QnaService implements BoardService{
 	
 	@Autowired
 	private QnaDAO qnaDAO;
+	
+	
+	public int setReply(QnaDTO qnaDTO) throws Exception {
+		BoardDTO boardDTO = qnaDAO.getDetail(qnaDTO);
+		QnaDTO parent = (QnaDTO)boardDTO;
+		
+		qnaDTO.setRef(parent.getRef());
+		qnaDTO.setStep(parent.getStep()+1);
+		qnaDTO.setDepth(parent.getDepth()+1);
+		
+		qnaDAO.setStepUpdate(parent);
+		
+		return qnaDAO.setReply(qnaDTO);
+	}
 
 	@Override
 	public List<BoardDTO> getList(Pager pager) throws Exception {
-		return qnaDAO.getList(null);
+		
+		pager.getRowNum();
+		Long totalCount=qnaDAO.getCount(pager);
+		pager.getNum(totalCount);
+		return qnaDAO.getList(pager);
 	}
 
 	@Override
@@ -40,14 +58,6 @@ public class QnaService implements BoardService{
 		return qnaDAO.setDelete(boardDTO);
 	}
 	
-	public int setReply(BoardDTO boardDTO) throws Exception {
-		return qnaDAO.setReply(boardDTO);
-	}
 
-	@Override
-	public Long getCount() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

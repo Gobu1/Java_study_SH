@@ -35,26 +35,25 @@ public class NoticeDAOTest extends MyAbstractTest {
 //		assertNull(boardDTO);
 //	}
 	
-//	@Test
-//	public void setAdd()throws Exception{
-//		for(int i=0; i<100; i++) {
-//		BoardDTO boardDTO = new BoardDTO();
-//
-//		boardDTO.setNum(1L);
-//		boardDTO.setTitle("asd"+i);
-//		boardDTO.setContents("dd"+i);
-//		boardDTO.setWriter("dd"+i);
-//		int result = noticeDAO.setAdd(boardDTO);
-//		if(i%10==0) {
-//			Thread.sleep(500);
-//		}
-//	}
-		
 	@Test
-	public void getCount()throws Exception{
-		long count = noticeDAO.getCount();
-		assertEquals(103, count);
+	public void setAdd()throws Exception{
+		for(int i=0; i<100; i++) {
+		BoardDTO boardDTO = new BoardDTO();
+
+		boardDTO.setNum(1L);
+		boardDTO.setTitle("asd"+i);
+		boardDTO.setContents("dd"+i);
+		boardDTO.setWriter("dd"+i);
+		int result = noticeDAO.setAdd(boardDTO);
+		if(i%10==0) {
+			Thread.sleep(500);
+		}
+		}
 	}
+	
+	
+		
+	
 	
 	
 
