@@ -11,6 +11,7 @@ public class BankMembersDTO {
 	private String email;
 	private String phone;
 	private List<BankAccountDTO> bankAccountDTOs;
+	private BankMembersFileDTO bankMembersFileDTOs;
 	
 	public String getUserName() {
 		return userName;
@@ -48,6 +49,13 @@ public class BankMembersDTO {
 	public void setBankAccountDTOs(List<BankAccountDTO> bankAccountDTOs) {
 		this.bankAccountDTOs = bankAccountDTOs;
 	}
+	public BankMembersFileDTO getBankMembersFileDTOs() {
+		return bankMembersFileDTOs;
+	}
+	public void setBankMembersFileDTOs(BankMembersFileDTO bankMembersFileDTOs) {
+		this.bankMembersFileDTOs = bankMembersFileDTOs;
+	}
+	
 	
 	
 	

@@ -1,14 +1,22 @@
 package com.iu.start.board.notice;
 
+import java.io.File;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+
+import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.iu.start.board.impl.BoardDTO;
+import com.iu.start.board.impl.BoardFileDTO;
 import com.iu.start.board.impl.BoardService;
+import com.iu.start.util.FileManager;
 import com.iu.start.util.Pager;
 
 @Service
@@ -16,7 +24,11 @@ public class NoticeService implements BoardService {
 	
 	@Autowired
 	private NoticeDAO noticeDAO;
-
+//	@Autowired
+//	private ServletContext servletContext;
+	@Autowired
+	private FileManager fileManager;
+	
 	@Override
 	public List<BoardDTO> getList(Pager pager) throws Exception {
 		
@@ -83,8 +95,70 @@ public class NoticeService implements BoardService {
 	}
 
 	@Override
-	public int setAdd(BoardDTO boardDTO) throws Exception {
-		return noticeDAO.setAdd(boardDTO);
+	public int setAdd(BoardDTO boardDTO, MultipartFile [] files, ServletContext servletContext) throws Exception {
+//		String realpath = servletContext.getRealPath("/resources/upload/notice");
+		int result = noticeDAO.setAdd(boardDTO);
+		String path = "resources/upload/notice";
+		for(MultipartFile multipartFile : files) {
+			if(multipartFile.isEmpty()) {
+				continue;
+			}
+			String filename = fileManager.saveFile(path, servletContext, multipartFile);
+			BoardFileDTO boardFileDTO = new BoardFileDTO();
+			boardFileDTO.setFileName(filename);
+			boardFileDTO.setOriName(multipartFile.getOriginalFilename());
+			boardFileDTO.setNum(boardDTO.getNum());
+			noticeDAO.setAddFile(boardFileDTO);
+		
+		
+		}
+//		File file = new File(realpath);
+//		if(!file.exists()) {
+//			file.mkdirs();
+//		}
+//		for(MultipartFile mf:files) {
+//		if(mf.isEmpty()) {
+//			continue;
+//		}
+//		file = new File(realpath);
+////		Calendar ca = Calendar.getInstance();
+////		Long time = ca.getTimeInMillis();
+//		String filesname = UUID.randomUUID().toString();
+//		System.out.println(mf.getOriginalFilename());
+//		
+//		filesname = filesname+"_"+mf.getOriginalFilename();
+//		file = new File(file, filesname);
+//		
+//		System.out.println("확인"+file+filesname);
+//		mf.transferTo(file);
+//		
+//		BoardFileDTO boardFileDTO = new BoardFileDTO();
+//		boardFileDTO.setFileName(filesname);
+//		boardFileDTO.setOriName(mf.getOriginalFilename());
+//		boardFileDTO.setNum(boardDTO.getNum());
+//		noticeDAO.setAddFile(boardFileDTO);
+//		}
+		
+
+//		for(int i=0; i<files.length; i++) {
+//			File file = new File(realpath);
+//			if(!file.exists()) {
+//				file.mkdirs();
+//			}
+//			if(files[i].isEmpty()) {	
+//			}
+//			Calendar ca = Calendar.getInstance();
+//			Long time = ca.getTimeInMillis();
+//			String filesname = time.toString();
+//			System.out.println(files[i].getOriginalFilename());
+//			
+//			filesname = filesname+"_"+files[i].getOriginalFilename();
+//			file = new File(file, filesname);
+//			
+//			System.out.println("확인"+file+filesname);
+//			files[i].transferTo(file);
+//			}
+		return result;
 	}
 
 	@Override

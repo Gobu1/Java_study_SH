@@ -16,7 +16,7 @@ public class BankAccountDAO {
 	private final String NAMESPACE = "com.iu.start.bankAccount.BankAccountDAO.";
 	
 	public int setAddAccount(BankAccountDTO bankAccountDTO)throws Exception{
-		return sqlSession.insert(NAMESPACE+"add", bankAccountDTO);
+		return sqlSession.insert(NAMESPACE+"setAddAccount", bankAccountDTO);
 	}
 	
 	public List<BankAccountDTO> getListByUserName(BankMembersDTO bankMembersDTO)throws Exception{

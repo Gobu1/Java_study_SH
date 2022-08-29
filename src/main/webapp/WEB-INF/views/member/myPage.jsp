@@ -12,6 +12,10 @@
 <body>
 	<c:import url="../template/header.jsp"></c:import>
 	
+		<div class="col-lg-4-mb-5">
+			<img width="200" height="200" alt="" src="../resources/upload/member/${dto.bankMembersFileDTOs.fileName }">
+		</div>
+		
 		<table class="table table-columns">
 			<thead>
 				<tr class="table-info">
@@ -46,6 +50,7 @@
 				 
 			</tbody>
 		</table>
+		
 	<c:import url="../template/footer.jsp"></c:import>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 </body>

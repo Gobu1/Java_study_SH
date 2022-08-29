@@ -12,7 +12,7 @@
 	<section class="container-fluid">
 		<div class="row">
 		
-			<form class="row g-3" action="./join.iu" name="join" method="post">
+			<form class="row g-3" action="./join.iu" name="join" method="post" enctype="multipart/form-data">
 			  <div class="col-md-6">
 			    <label for="inputEmail4" class="form-label">UserName</label>
 			    <input type="text" class="form-control" id="inputEmail4" name="userName">
@@ -21,17 +21,21 @@
 			    <label for="inputPassword4" class="form-label">Password</label>
 			    <input type="password" class="form-control" id="inputPassword4" name="password">
 			  </div>
-			  <div class="col-12">
+			  <div class="col-6">
 			    <label for="inputAddress" class="form-label">Name</label>
 			    <input type="text" class="form-control" id="inputAddress" placeholder="PER1" name="name">
 			  </div>
-			  <div class="col-12">
+			  <div class="col-6">
 			    <label for="inputAddress2" class="form-label">Email</label>
 			    <input type="text" class="form-control" id="inputAddress2" placeholder="email@email" name="email">
 			  </div>
 			  <div class="col-md-6">
 			    <label for="inputCity" class="form-label">Phone</label>
 			    <input type="text" class="form-control" id="inputCity" placeholder="01010101" name="phone">
+			  </div>
+			  <div class="col-2">
+			    <label for="inputPhoto" class="form-label">Photo</label>
+			  	<input type="file" class="form-control" id="photo"  name="photo">
 			  </div>
 			 
 			  <div class="col-12">

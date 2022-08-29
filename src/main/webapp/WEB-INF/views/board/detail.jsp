@@ -24,9 +24,17 @@
 			<input type="text" name="title" class="form-control mt-4 mb-2"
 				readonly value="${boardDTO.title }" required>
 			<input class="form-control" type="text" value="${boardDTO.regDate }" aria-label="readonly input example" readonly>
-			<div class="form-group">
-				<textarea class="form-control" rows="10" name="contents"
-					readonly  required>${boardDTO.contents }</textarea>
+			<div class="form-control"  style="min-height: 60vh" >
+				<div class="col">
+					${boardDTO.contents}
+				</div>
+			</div>
+			<div class="form-control">
+				<c:forEach items="${boardDTO.boardFileDTOs }" var="fileDTO">
+					<p>
+					<a href="../resources/upload/${board}/${fileDTO.fileName}">${fileDTO.oriName }</a>
+					</p>
+				</c:forEach>
 			</div>
 			<c:if test="${not empty sessionScope.member}">
 				<a href="./reply.iu?num=${boardDTO.num }" " class="btn btn-outline-primary" 

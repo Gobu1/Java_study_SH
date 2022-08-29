@@ -3,6 +3,7 @@ package com.iu.start.bankMembers;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iu.start.bankAccount.BankAccountDTO;
@@ -25,6 +27,7 @@ public class MembersController {
 	private BankMembersService bankMembersService;
 //	@Autowired
 //	private BankAccountService bankAccountService;
+	
 	
 	
 	@RequestMapping(value="logout.iu", method=RequestMethod.GET)
@@ -56,20 +59,15 @@ public class MembersController {
 	}
 	
 	@RequestMapping(value = "join.iu", method = RequestMethod.POST)
-	public String join(HttpServletRequest request) throws Exception {
-		System.out.println("POST 가입 실행");
-		BankMembersDTO bankMembersDTO = new BankMembersDTO();
-		bankMembersDTO.setUserName(request.getParameter("userName"));
-		bankMembersDTO.setPassword(request.getParameter("password"));
-		bankMembersDTO.setName(request.getParameter("name"));
-		bankMembersDTO.setEmail(request.getParameter("email"));
-		bankMembersDTO.setPhone(request.getParameter("phone"));
-		int result = bankMembersService.setJoin(bankMembersDTO);
-		if (result==1) {
-			System.out.println("정상 join");
-		}else {
-			System.out.println("작동하지않음");
-		}
+	public String join(BankMembersDTO bankMembersDTO, MultipartFile photo, HttpSession session) throws Exception {
+		
+		System.out.println("업로드시 파일명 - "+photo.getOriginalFilename());
+		System.out.println("업로드 파라미터이름 - "+photo.getName());
+		System.out.println("업로드시 파일크기"+photo.getSize());
+		int result = bankMembersService.setJoin(bankMembersDTO,photo, session.getServletContext());
+	
+		
+		
 		return "redirect:./login.iu";
 	}
 	

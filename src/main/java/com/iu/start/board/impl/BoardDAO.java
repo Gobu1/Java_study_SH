@@ -8,6 +8,8 @@ import com.iu.start.util.Pager;
 
 public interface BoardDAO {
 	
+	public int setAddFile(BoardFileDTO boardFileDTO)throws Exception;
+	
 	public List<BoardDTO> getList(Pager pager)throws Exception;
 	
 	public BoardDTO getDetail(BoardDTO boardDTO)throws Exception;

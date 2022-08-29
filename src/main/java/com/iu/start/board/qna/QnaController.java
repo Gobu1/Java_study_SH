@@ -24,7 +24,7 @@ public class QnaController {
 	
 	@ModelAttribute("board")
 	public String getBoard() {
-		return "Qna";
+		return "qna";
 	}
 	
 	@PostMapping("reply.iu")

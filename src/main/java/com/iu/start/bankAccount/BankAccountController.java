@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.iu.start.bankMembers.BankMembersDTO;
 
 @Controller
-@RequestMapping(value = "/account/*")
+@RequestMapping(value = "/bankAccount/*")
 public class BankAccountController {
 	
 	@Autowired
@@ -20,7 +20,7 @@ public class BankAccountController {
 	public String add(BankAccountDTO bankAccountDTO, HttpSession session)throws Exception{
 		BankMembersDTO bankMembersDTO = (BankMembersDTO)session.getAttribute("member");
 		bankAccountDTO.setUserName(bankMembersDTO.getUserName());
-		
+		System.out.println(bankMembersDTO.getUserName());
 		//DTO : userName, bookNum
 		int result = bankAccountService.setAddAccount(bankAccountDTO);
 		
