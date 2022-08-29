@@ -33,7 +33,7 @@
 	
 	<select id="getDetail" parameterType="BoardDTO" resultMap="getDetailResult">
 		SELECT * FROM NOTICE N
-		LEFT JOIN NOTICEFILE NF USING(NUM) WHERE NUM = #{num}
+			LEFT JOIN NOTICEFILE NF USING(NUM) WHERE NUM = #{num}
 	</select>
 	
 	<resultMap type="NoticeDTO" id="getDetailResult">

@@ -60,7 +60,7 @@ public class QnaDAO implements BoardDAO {
 
 	@Override
 	public int setAddFile(BoardFileDTO boardFileDTO) throws Exception {
-		return sqlSession.insert(NAMESPACE+"setAddFile"+boardFileDTO);
+		return sqlSession.insert(NAMESPACE+"setAddFile", boardFileDTO);
 	}
 
 }

@@ -53,7 +53,7 @@ public class QnaService implements BoardService{
 	@Override
 	public int setAdd(BoardDTO boardDTO, MultipartFile [] files, ServletContext servletContext) throws Exception {
 		int result = qnaDAO.setAdd(boardDTO);
-		String path = "resources/upload/notice";
+		String path = "resources/upload/qna";
 		for(MultipartFile multipartFile : files) {
 			if(multipartFile.isEmpty()) {
 				continue;
@@ -64,8 +64,9 @@ public class QnaService implements BoardService{
 			boardFileDTO.setOriName(multipartFile.getOriginalFilename());
 			boardFileDTO.setNum(boardDTO.getNum());
 			qnaDAO.setAddFile(boardFileDTO);
+			System.out.println("에드파일 실행후");
 		}
-		return qnaDAO.setAdd(boardDTO);
+		return result;
 	}
 
 	@Override
