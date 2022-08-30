@@ -53,6 +53,7 @@
             </button>
           </div>
     </section>
+    <script type="/resources/js/test.js"></script>
 
     
       
