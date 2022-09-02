@@ -2,47 +2,61 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-   
-<mapper namespace="com.iu.start.board.notice.NoticeDAO">
+    
+<mapper namespace="com.iu.home.board.notice.NoticeDAO">
 	<sql id="search">
-		<choose>
-			<when test="kind == 'title'">TITLE</when>
-			<when test="kind == 'writer'">WRITER</when>
-			<otherwise>CONTENTS</otherwise>
-		</choose> 
-		LIKE '%'||#{search}||'%'
+		WHERE
+		   <choose>
+		         <when test="kind == 'title'">TITLE</when>
+		         <when test="kind == 'writer'">WRITER</when>
+		         <otherwise>contents</otherwise>
+		   </choose> 
+		LIKE '%'||#{search}||'%'	
+	
 	</sql>
 	
 	<insert id="setAddFile" parameterType="BoardFileDTO">
-		INSERT INTO NOTICEFILE 
+		INSERT INTO NOTICEFILE
 		VALUES(FILE_SEQ.NEXTVAL, #{num}, #{fileName}, #{oriName})
 	</insert>
-	
-	
-	<select id="getList" parameterType="Pager" resultType="NoticeDTO">
+
+	<select id="getCount" resultType="Long" parameterType="Pager">
+		SELECT COUNT(num) FROM NOTICE
+		<include refid="search"></include>
+		
+	</select>
+
+	<select id="getList" resultType="NoticeDTO" parameterType="Pager">
 		SELECT * FROM
-			(SELECT ROWNUM R, N.* FROM
-				(SELECT * FROM NOTICE WHERE 
-					<include refid="search"></include>
-					
-				ORDER BY NUM DESC) N)
-					WHERE R BETWEEN #{startRow} AND #{lastRow}
+		    (
+		        SELECT ROWNUM R, N.* FROM
+		            (SELECT * FROM NOTICE 
+		            
+						<include refid="search"></include>
+		            
+		            
+		            
+		             ORDER BY NUM DESC) N
+		    )
+		WHERE R BETWEEN #{startRow} and #{lastRow}
 	</select>
 	
-	<!-- 벨류값이아닌 예약어들은 #{}가 불가능 -->
-	
 	<select id="getDetail" parameterType="BoardDTO" resultMap="getDetailResult">
-		SELECT * FROM NOTICE N
-			LEFT JOIN NOTICEFILE NF USING(NUM) WHERE NUM = #{num}
+		SELECT N.*, NF.*
+		FROM NOTICE N
+			 LEFT JOIN
+			 NOTICEFILE NF
+			 ON N.NUM=NF.NUM	
+		WHERE N.NUM=#{num}
 	</select>
 	
 	<resultMap type="NoticeDTO" id="getDetailResult">
-		<id column="NUM" property="num"/>
-		<result column="TITLE" property="title"/>
-		<result column="WRITER" property="writer"/>
-		<result column="CONTENTS" property="contents"/>
-		<result column="REGDATE" property="regDate"/>
-		<result column="HIT" property="hit"/>
+		<id column="num" property="num"/>
+		<result column="title" property="title"/>
+		<result column="writer" property="writer"/>
+		<result column="contents" property="contents"/>
+		<result column="regDate" property="regDate"/>
+		<result column="hit" property="hit"/>
 		<collection property="boardFileDTOs" javaType="List" ofType="BoardFileDTO">
 			<id column="FILENUM" property="fileNum"/>
 			<result column="FILENAME" property="fileName"/>
@@ -50,38 +64,21 @@
 		</collection>
 	</resultMap>
 	
-	<insert id="setAdd" parameterType="NoticeDTO">
+	
+	<insert id="setAdd" parameterType="BoardDTO">
 		<selectKey order="BEFORE" keyProperty="num" resultType="Long">
 			SELECT BOARD_SEQ.NEXTVAL FROM DUAL
 		</selectKey>
-		INSERT INTO NOTICE VALUES (#{num}, #{title}, #{contents}, #{writer}, sysdate, 0)
+		INSERT INTO NOTICE (NUM, TITLE, WRITER, CONTENTS, REGDATE, HIT)
+		VALUES (#{num}, #{title}, #{writer}, #{contents}, sysdate, 0)
 	</insert>
 	
 	<update id="setUpdate" parameterType="BoardDTO">
-		UPDATE NOTICE SET TITLE = #{title}, CONTENTS = #{contents} 
-			WHERE NUM = #{num}
+		UPDATE NOTICE SET TITLE=#{title}, CONTENTS=#{contents} WHERE NUM=#{num}
 	</update>
 	
 	<delete id="setDelete" parameterType="BoardDTO">
-		DELETE FROM NOTICE WHERE NUM = #{num}
+		DELETE NOTICE WHERE NUM=#{num}
 	</delete>
-	
-	<select id="getCount" resultType="Long" parameterType="Pager">
-		SELECT COUNT(NUM) FROM NOTICE WHERE
-			<choose>
-				<when test="kind == 'title'">TITLE</when>
-				<when test="kind == 'writer'">WRITER</when>
-				<otherwise>CONTENTS</otherwise>
-			</choose> 
-			LIKE '%'||#{search}||'%'
-	</select>
-	
-<!-- 	<select id="getList" parameterType="Pager" resultType="NoticeDTO">
-		SELECT * FROM
-			(SELECT ROWNUM R, N.* FROM
-				(SELECT * FROM NOTICE ORDER BY NUM DESC) N)
-					WHERE R BETWEEN #{startRow} AND #{lastRow}
-	</select> -->
-	
-	
-</mapper>
+
+</mapper>    

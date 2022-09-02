@@ -20,7 +20,7 @@
 
 <section class="container-fluid col-lg-6">
 	<div class="row">
-	<table class="table table-striped-columns">
+	<table class="table table-dark">
 	  <thead>
 	    <tr>	
 	      <th scope="col">상품번호</th>
