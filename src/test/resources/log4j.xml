@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.iu.start">
+	<logger name="com.iu.home">
 		<level value="info" />
 	</logger>
 	
