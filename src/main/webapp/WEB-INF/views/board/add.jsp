@@ -56,6 +56,10 @@
 <script src="/resources/js/board_files.js"></script>
 <script type="text/javascript">
 	$("#contents1").summernote();
+	let message = '${message}';
+	let url = '${url}';
+	alert(message);
+	locaion.href=url;
 </script>
 </body>
 </html>

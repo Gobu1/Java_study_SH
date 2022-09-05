@@ -66,6 +66,17 @@ public class NoticeController {
 	public ModelAndView setAdd(BoardDTO boardDTO, MultipartFile [] files, HttpSession session)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		int result = noticeService.setAdd(boardDTO, files, session.getServletContext());
+		
+		String message = "등록 실패";
+		String url = "";
+		if(boardDTO != null) {
+			message = "등록 성공";
+			url = "./list";
+		}
+		
+		mv.addObject("message", message);
+		mv.addObject("url", url);
+		
 		mv.setViewName("redirect:./list.iu");
 		return mv;
 		

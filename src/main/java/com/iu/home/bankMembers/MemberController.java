@@ -23,8 +23,8 @@ import com.iu.home.bankAccount.BankAccountService;
 
 @Controller 
 @RequestMapping(value="/member/*")
-//이 클래스는 Controller역할, 
-//Container에게 이 클래스의 객체를 생성 위임
+//�씠 �겢�옒�뒪�뒗 Controller�뿭�븷, 
+//Container�뿉寃� �씠 �겢�옒�뒪�쓽 媛앹껜瑜� �깮�꽦 �쐞�엫
 public class MemberController {
 	
 	@Autowired
@@ -56,36 +56,47 @@ public class MemberController {
 	}
 	
 	// annotation
-	// @ : 설명+실행
+	// @ : �꽕紐�+�떎�뻾
 	@RequestMapping(value="logout", method = RequestMethod.GET)
 	public String logout(HttpSession session)throws Exception{
 		session.invalidate();
 		return "redirect:../";
 	}
 	
-	//  /member/login // 절대경로 작성
+	//  /member/login // �젅��寃쎈줈 �옉�꽦
 	@RequestMapping(value = "login.iu", method = RequestMethod.GET)
 	public String login() {
-		System.out.println("로그인 실행");
 		return "member/login";
 	}
 	
 	@RequestMapping(value = "login.iu", method = RequestMethod.POST)
-	public String login(HttpSession session, BankMembersDTO bankMembersDTO, Model model) throws Exception {
-		System.out.println("DB에 로그인 실행");
+	public ModelAndView login(HttpSession session, BankMembersDTO bankMembersDTO, Model model) throws Exception {
 		bankMembersDTO = bankMembersService.getLogin(bankMembersDTO);
 		System.out.println(bankMembersDTO);
+		ModelAndView mv = new ModelAndView();
 		//HttpSession session = request.getSession();
 		session.setAttribute("member", bankMembersDTO);
+		int result = 0;
+		String message = "로그인 실패";
+		String url = "../member/login.iu";
+		if(bankMembersDTO != null) {
+			message = "로그인 성공";
+			result = 1;
+			url = "../";
+		}
 		
-		// "redirect:다시접속할URL주소(절대경로,상대경로)"
-		return "redirect:../";
+		mv.addObject("result", result);
+		mv.addObject("message", message);
+		mv.addObject("url", url);
+		mv.setViewName("common/result");
+		
+		// "redirect:�떎�떆�젒�냽�븷URL二쇱냼(�젅��寃쎈줈,�긽��寃쎈줈)"
+		return mv;
 	}
 	
 	// join  /member/join Get
 	@RequestMapping(value = "join.iu", method = RequestMethod.GET)
 	public String join() {
-		System.out.println("조인 Get 실행");
 		
 		return "member/join";
 	}
@@ -93,12 +104,7 @@ public class MemberController {
 	//Post
 	@RequestMapping(value = "join.iu", method = RequestMethod.POST)
 	public String join(BankMembersDTO bankMembersDTO, MultipartFile photo, HttpSession session) throws Exception {
-		System.out.println("조인 Post 실행");
-		System.out.println(photo);
-		
-		System.out.println("upload 파일명 : "+photo.getOriginalFilename());
-		System.out.println("upload 파라미터명 : "+photo.getName());
-		System.out.println("upload 파일 크기 : "+photo.getSize());
+
 		int result = bankMembersService.setJoin(bankMembersDTO, photo, session.getServletContext());
 
 		
