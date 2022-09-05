@@ -16,7 +16,7 @@ public class BankMembersDAO implements MembersDAO {
 	
 	@Autowired
 	private SqlSession sqlSession;
-	private final String NAMESPACE = "com.iu.start.bankMembers.BankMembersDAO.";
+	private final String NAMESPACE = "com.iu.home.bankMembers.BankMembersDAO.";
 	
 	public int setAddFile(BankMembersFileDTO bankMembersFileDTO)throws Exception{
 		return sqlSession.insert(NAMESPACE+"setAddFile", bankMembersFileDTO);

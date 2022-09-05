@@ -6,7 +6,7 @@
 <mapper namespace="com.iu.home.board.qna.QnaDAO">
 	<insert id="setAddFile" parameterType="BoardFileDTO">
 		INSERT INTO QNAFILE
-		VALUES(FILE_SEQ.NEXTVAL, #{num}, #{filename}, #{oriName})
+		VALUES(FILE_SEQ.NEXTVAL, #{num}, #{fileName}, #{oriName})
 	</insert>
 	<insert id="setReplyAdd" parameterType="QnaDTO">
 		<selectKey keyProperty="num" order="BEFORE" resultType="long">

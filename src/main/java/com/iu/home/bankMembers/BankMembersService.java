@@ -54,20 +54,22 @@ public class BankMembersService {
 	}
 
 	public int setJoin(BankMembersDTO bankMembersDTO, MultipartFile photo, ServletContext servletContext) throws Exception {
+		System.out.println("체크1");
 		int result =bankMembersDAO.setJoin(bankMembersDTO);
-		//1. HDD에 파일을 저장
-		//  파일저장시에 경로는 Tomcat기준이 아니라 OS의 기준으로 설정
-		// 1) 파일저장 위치
+		System.out.println("체크2");
+		//1. HDD�뿉 �뙆�씪�쓣 ���옣
+		//  �뙆�씪���옣�떆�뿉 寃쎈줈�뒗 Tomcat湲곗��씠 �븘�땲�씪 OS�쓽 湲곗��쑝濡� �꽕�젙
+		// 1) �뙆�씪���옣 �쐞移�
 		//    /resources/upload/member
 		
-//		// 2) 저장할 폴더의 실제경로 반환(OS 기준)
+//		// 2) ���옣�븷 �뤃�뜑�쓽 �떎�젣寃쎈줈 諛섑솚(OS 湲곗�)
 //		String realPath = servletContext.getRealPath("resources/upload/member");
 //		System.out.println("RealPath : "+realPath);
 //		
-//		// 3) 저장할 폴더의 정보를 가지는 자바 객체 생성
+//		// 3) ���옣�븷 �뤃�뜑�쓽 �젙蹂대�� 媛�吏��뒗 �옄諛� 媛앹껜 �깮�꽦
 //		File file = new File(realPath);
 //		
-//		// *** File 첨부가 없을 때 구분
+//		// *** File 泥⑤�媛� �뾾�쓣 �븣 援щ텇
 //		
 //		//if(photo.getSize()!=0) {}
 //		if(!photo.isEmpty()) {
@@ -76,8 +78,8 @@ public class BankMembersService {
 //				file.mkdirs();
 //			}
 //			
-//			// 4) 중복되지 않는 파일명 생성
-//			//    -- 시간, java api,...
+//			// 4) 以묐났�릺吏� �븡�뒗 �뙆�씪紐� �깮�꽦
+//			//    -- �떆媛�, java api,...
 //			// java api
 //			String fileName = UUID.randomUUID().toString();
 //			System.out.println(fileName);
@@ -88,16 +90,16 @@ public class BankMembersService {
 //			fileName = fileName+"_"+photo.getOriginalFilename();
 //			System.out.println(fileName);
 //			
-//			//5. HDD에 파일 저장
-//			// 어느 폴더에 어떤 이름으로 저장할 File 객체 생성
+//			//5. HDD�뿉 �뙆�씪 ���옣
+//			// �뼱�뒓 �뤃�뜑�뿉 �뼱�뼡 �씠由꾩쑝濡� ���옣�븷 File 媛앹껜 �깮�꽦
 //			file = new File(file, fileName);
 //			
-//			//  1) MutlipartFile 클래스의 transferTo 메서드 사용
+//			//  1) MutlipartFile �겢�옒�뒪�쓽 transferTo 硫붿꽌�뱶 �궗�슜
 //			photo.transferTo(file);
 			
-			//  2) FileCopyUtils 클래스의 copy 메서드 사용
+			//  2) FileCopyUtils �겢�옒�뒪�쓽 copy 硫붿꽌�뱶 �궗�슜
 			
-			//2. 저장된 파일정보를 DB에 저장
+			//2. ���옣�맂 �뙆�씪�젙蹂대�� DB�뿉 ���옣
 		String path="resources/upload/member";
 		String fileName = fileManger.saveFile(servletContext,path, photo);
 		
@@ -108,7 +110,7 @@ public class BankMembersService {
 				membersFileDTO.setUserName(bankMembersDTO.getUserName());
 				bankMembersDAO.setAddFile(membersFileDTO);
 			
-			}//isEmpty 끝
+			}//isEmpty �걹
 		
 		return result;
 	}

@@ -17,7 +17,7 @@ public class NoticeDAOTest extends MyAbstractTest {
 	
 	@Test
 	public void getCountTest()throws Exception{
-		long count = noticeDAO.getCount();
+		long count = noticeDAO.getCount(null);
 		assertEquals(102L, count);
 	}
 	

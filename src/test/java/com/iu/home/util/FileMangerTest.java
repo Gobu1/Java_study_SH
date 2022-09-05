@@ -14,7 +14,7 @@ public class FileMangerTest extends MyAbstractTest {
 	
 	@Test
 	public void saveFileTest() throws Exception {
-		fileManger.saveFile("resources/upload/test");
+		fileManger.saveFile(null, "resources/upload/test", null);
 		System.out.println("Finish-----");
 	}
 

@@ -16,7 +16,7 @@
 	</sql>
 	
 	<insert id="setAddFile" parameterType="BoardFileDTO">
-		INSERT INTO NOTICEFILE
+		INSERT INTO NOTICEFILE 
 		VALUES(FILE_SEQ.NEXTVAL, #{num}, #{fileName}, #{oriName})
 	</insert>
 

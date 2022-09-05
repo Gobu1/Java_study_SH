@@ -6,7 +6,7 @@
 
 <!-- namespace의 값은 사용할 DAO의 풀패키지명 -->
 <!-- application 내에서 중복 X -->
-<mapper namespace="com.iu.start.bankMembers.BankMembersDAO">
+<mapper namespace="com.iu.home.bankMembers.BankMembersDAO">
 	<insert id="setAddFile" parameterType="BankMembersFileDTO">
 		INSERT INTO MEMBERFILE (FILENUM, USERNAME, FILENAME, ORINAME)
 		VALUES (FILE_SEQ.NEXTVAL, #{userName}, #{fileName}, #{oriName})

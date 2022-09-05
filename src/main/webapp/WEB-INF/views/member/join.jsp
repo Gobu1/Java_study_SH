@@ -39,7 +39,7 @@
 			  <div class="row mb-3">
 			    <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
 			    <div class="col-sm-10">
-			      <input type="password" name="password" class="form-control" id="inputPasswordCheck" placeholder="Password 입력">
+			      <input type="password" class="form-control" id="inputPasswordCheck" placeholder="Password 입력">
 				  <div id="inputPasswordCheckResult"></div>
 			    </div>
 			  </div>
