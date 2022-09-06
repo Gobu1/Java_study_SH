@@ -49,8 +49,36 @@
 </div>
 
 </div>
+	<!--comment part-->
+	<div class="row">
+		<div class="card mb-2">
+			<div class="card-header bg-light">
+					<i class="fa fa-comment fa"></i> REPLY
+			</div>
+			<div class="card-body">
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item">
+					<div class="form-inline mb-2">
+						<label for="writer"><i class="fa fa-user-circle-o fa-2x"></i></label>
+						<input type="text" class="form-control ml-2" placeholder="Enter yourId" id="writer">
+					</div>
+					<textarea class="form-control" id="contents" rows="3"></textarea>
+					<button type="button" class="btn btn-dark mt-3" id="commentAdd" data-booknum="${dto.bookNum}">답글 작성</button>
+					</li>
+				</ul>
+			</div>
+		</div>
+		
+	</div>
+	<div id="commentList">
+		
+		
+		
+	</div>
+
 </section>
 <c:import url="../template/footer.jsp"></c:import>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+<script src="/resources/js/bankbookComment.js"></script>
 </body>
 </html>

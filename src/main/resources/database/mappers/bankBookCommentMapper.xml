@@ -9,4 +9,10 @@
     		VALUES (BOARD_SEQ.NEXTVAL, #{bookNum}, #{writer}, #{contents}, sysdate)
     	</insert>
     	
+    	<select id="getCommentList" parameterType="CommentPager" resultType="BankBookCommentDTO">
+    	SELECT * FROM (SELECT ROWNUM R, N.*FROM 
+			(SELECT * FROM BB_COMMENT WHERE BOOKNUM = #{bookNum} ORDER BY NUM DESC) N )
+        		WHERE R BETWEEN #{startRow} AND #{lastRow}
+    	</select>
+    	
     </mapper>
