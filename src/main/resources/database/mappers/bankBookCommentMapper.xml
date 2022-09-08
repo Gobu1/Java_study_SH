@@ -4,6 +4,14 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
     <mapper namespace="com.iu.home.bankBook.BankBookCommentDAO">
+    	<update id="setCommentUpdate" parameterType="BankBookCommentDTO">
+    		UPDATE BB_COMMENT SET CONTENTS = #{contents} WHERE NUM = #{num}
+    	</update>
+    
+    	<delete id="setCommentDelete" parameterType="BankBookCommentDTO">
+			DELETE FROM BB_COMMENT WHERE NUM = #{num}
+    	</delete>
+    	
     	<insert id="setCommentAdd" parameterType="BankBookCommentDTO">
     		INSERT INTO BB_COMMENT 
     		VALUES (BOARD_SEQ.NEXTVAL, #{bookNum}, #{writer}, #{contents}, sysdate)
@@ -13,6 +21,10 @@
     	SELECT * FROM (SELECT ROWNUM R, N.*FROM 
 			(SELECT * FROM BB_COMMENT WHERE BOOKNUM = #{bookNum} ORDER BY NUM DESC) N )
         		WHERE R BETWEEN #{startRow} AND #{lastRow}
+    	</select>
+    	
+    	<select id="getCommentCount" parameterType="BankBookCommentDTO" resultType="Long">
+    		SELECT COUNT(NUM) FROM BB_COMMENT WHERE BOOKNUM = #{bookNum}
     	</select>
     	
     </mapper>

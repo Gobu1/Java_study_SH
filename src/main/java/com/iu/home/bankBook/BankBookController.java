@@ -2,7 +2,9 @@ package com.iu.home.bankBook;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,11 +27,20 @@ public class BankBookController {
 	private BankBookService bankBookService;
 	
 	//-------------- comment -----------------
+	@PostMapping("commentUpdate")
+	@ResponseBody
+	public int setCommentUpdate(BankBookCommentDTO bankBookCommentDTO)throws Exception{
+		System.out.println(bankBookCommentDTO.getNum());
+		System.out.println(bankBookCommentDTO.getContents());
+		int result = bankBookService.setCommentUpdate(bankBookCommentDTO);
+		return result;
+	}
+	
+	
 	@PostMapping(value = "commentAdd")
 	@ResponseBody
 	public ModelAndView setCommentAdd(BankBookCommentDTO bankBookCommentDTO)throws Exception{
 		ModelAndView mv=  new ModelAndView();
-		
 		
 		int result = bankBookService.setCommentAdd(bankBookCommentDTO);
 //		mv.addObject("result", result);
@@ -42,7 +53,7 @@ public class BankBookController {
 	//1. jsp에 출력하고 결과물을 응답으로 전송
 	@GetMapping(value = "commentList")
 	@ResponseBody
-	public List<BankBookCommentDTO> getCommentList (CommentPager commentPager)throws Exception{
+	public Map<String, Object> getCommentList (CommentPager commentPager)throws Exception{
 //		ModelAndView mv = new ModelAndView();
 		List<BankBookCommentDTO> ar = bankBookService.getCommentList(commentPager);
 		
@@ -53,10 +64,20 @@ public class BankBookController {
 		//json
 		//[]여러개의 리스트 DTO == {}
 		//ex)num=1 == {"num":1}
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", ar);
+		map.put("pager", commentPager);
 		
+		return map;
 		
-		return ar;
-		
+	}
+	
+	@PostMapping(value = "commentDelete")
+	@ResponseBody
+	public int setCommentDelete(BankBookCommentDTO bankBookCommentDTO)throws Exception{
+		System.out.println(bankBookCommentDTO.getNum());
+		int result = bankBookService.setCommentDelete(bankBookCommentDTO);
+		return result;
 	}
 	
 	

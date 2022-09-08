@@ -10,6 +10,7 @@ public class CommentPager {
 	private Long lastNum;
 	private Long perPage;
 	private Long perBlock;
+	private Long totalPage;
 	
 	private boolean pre;
 	private boolean next;
@@ -17,6 +18,50 @@ public class CommentPager {
 	public void getRowNum() {
 		this.startRow = (this.getPage()-1)*this.getPerPage()+1;
 		this.lastRow = this.getPage()*this.getPerPage();
+	}
+	
+	public void makePage(Long totalCount)throws Exception{
+		//2. totalCount로 totalPage구하기 ex)100
+		this.totalPage=totalCount/this.getPerPage();
+		if(totalCount%this.getPerPage() != 0) {
+			this.totalPage++;
+		}
+//		
+//		//2_1 totalPage보다 page가 더 클 경우
+//		if(this.getPage()>totalPage) {
+//			this.setPage(totalPage);
+//		}
+//		
+//		//3. totalPage로 totalBlock 구하기
+//		Long totalBlock = totalPage/this.getPerBlock();
+//		if(totalPage%this.getPerBlock() != 0) {
+//			totalBlock++;
+//		}
+//		
+//		//4. page로 curBlock 찾기
+//		Long curBlock = this.getPage()/this.getPerBlock();
+//		if(this.getPage()%this.getPerBlock() != 0) {
+//			curBlock++;
+//		}
+//		
+//		//5. curBlock으로 startNum , lastNum 구하기
+//		this.startNum = (curBlock-1)*this.getPerBlock()+1;
+//		this.lastNum = curBlock*this.getPerBlock();
+//		
+//		//6. curBlock이 마지막block(totalBlock과 같을 때)
+//		if(curBlock==totalBlock) {
+//			this.lastNum=totalPage;
+//		}
+//		
+//		//7. 이전, 다음 블럭의 유무
+//		if(curBlock>1) {
+//			pre=true;
+//		}
+//		
+//		if(curBlock<totalBlock) {
+//			next=true;
+//		}
+		
 	}
 	
 	
@@ -74,7 +119,7 @@ public class CommentPager {
 
 	public Long getPerPage() {
 		if(this.perPage==null) {
-			this.perPage=10L;
+			this.perPage=5L;
 		}
 		return perPage;
 	}
@@ -108,6 +153,14 @@ public class CommentPager {
 
 	public void setNext(boolean next) {
 		this.next = next;
+	}
+
+	public Long getTotalPage() {
+		return totalPage;
+	}
+
+	public void setTotalPage(Long totalPage) {
+		this.totalPage = totalPage;
 	}
 	
 	

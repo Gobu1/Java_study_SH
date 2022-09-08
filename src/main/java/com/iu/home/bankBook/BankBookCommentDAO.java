@@ -15,6 +15,10 @@ public class BankBookCommentDAO {
 	private SqlSession sqlSession;
 	private final String NAMEPSACE = "com.iu.home.bankBook.BankBookCommentDAO.";
 	
+	public int setCommentUpdate(BankBookCommentDTO bankBookCommentDTO)throws Exception{
+		return sqlSession.update(NAMEPSACE+"setCommentUpdate", bankBookCommentDTO);
+	}
+	
 	public int setCommentAdd(BankBookCommentDTO bankBookCommentDTO)throws Exception{
 		return sqlSession.insert(NAMEPSACE+"setCommentAdd", bankBookCommentDTO);
 	}
@@ -23,5 +27,12 @@ public class BankBookCommentDAO {
 		return sqlSession.selectList(NAMEPSACE+"getCommentList", commentPager);
 	}
 
+	public Long getCommentCount(CommentPager commentPager)throws Exception {
+		return sqlSession.selectOne(NAMEPSACE+"getCommentCount", commentPager);
+	}
 	
+	public int setCommentDelete(BankBookCommentDTO bankBookCommentDTO)throws Exception{
+		System.out.println(bankBookCommentDTO.getNum());
+		return sqlSession.delete(NAMEPSACE+"setCommentDelete", bankBookCommentDTO);
+	}
 }

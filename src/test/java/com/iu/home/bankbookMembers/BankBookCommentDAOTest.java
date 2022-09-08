@@ -29,15 +29,31 @@ public class BankBookCommentDAOTest extends MyAbstractTest {
 //		
 //	}
 	
+//	@Test
+//	public void getCommentList()throws Exception{
+//		CommentPager commentPager = new CommentPager();
+//		commentPager.setBookNum(1662103891620L);
+//		commentPager.getRowNum();
+//		System.out.println(commentPager.getStartRow());
+//		System.out.println(commentPager.getLastRow());
+//		List<BankBookCommentDTO> ar =  bankBookCommentDAO.getCommentList(commentPager);
+//		assertNotEquals(0, ar.size());
+//	}
+//	@Test
+//	public void getCommentCount()throws Exception{
+//		CommentPager commentPager = new CommentPager();
+//		int result = bankBookCommentDAO.getCommnetCount(commentPager);
+//		assertNotEquas(0, result);
+//	}
+	
 	@Test
-	public void getCommentList()throws Exception{
-		CommentPager commentPager = new CommentPager();
-		commentPager.setBookNum(1662103891620L);
-		commentPager.getRowNum();
-		System.out.println(commentPager.getStartRow());
-		System.out.println(commentPager.getLastRow());
-		List<BankBookCommentDTO> ar =  bankBookCommentDAO.getCommentList(commentPager);
-		assertNotEquals(0, ar.size());
+	public void setCommentUpdate()throws Exception{
+		BankBookCommentDTO bankBookCommentDTO = new BankBookCommentDTO();
+		bankBookCommentDTO.setNum(83L);
+		bankBookCommentDTO.setWriter("213");
+		bankBookCommentDTO.setContents("555");
+		int result = bankBookCommentDAO.setCommentUpdate(bankBookCommentDTO);
+		assertNotEquals(0, result);
 	}
 
 }
