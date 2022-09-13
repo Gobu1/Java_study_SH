@@ -50,7 +50,6 @@ public class MemberController {
 		//mv.addObject("list", ar);
 		mv.addObject("dto", bankMembersDTO);
 		
-		
 		mv.setViewName("member/myPage");
 		return mv;
 	}
